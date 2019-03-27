@@ -43,7 +43,7 @@ app.get("/", function(req, res) {
   });
 
 
-app.get("/scraoe", function (req, res) {
+app.get("/scrape", function (req, res) {
     axios.get("https://www.theonion.com/").then(function (response) {
         var $ = cheerio.load(response.data);
 
@@ -68,7 +68,7 @@ app.get("/scraoe", function (req, res) {
 // Route for getting articles from DB
 app.get("/articles", function (req, res) {
     var id = req.params.id
-    db.Article.findById(id)
+    db.Article.find({})
         .then(function (dbArticle) {
             res.json(dbArticle)
         }).catch(function (err) {
