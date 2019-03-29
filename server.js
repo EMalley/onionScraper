@@ -22,7 +22,7 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/onionScraper", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/nprScraper", { useNewUrlParser: true });
 
 // handlebars
 var exphbs = require("express-handlebars");
@@ -35,7 +35,7 @@ app.set("view engine", "handlebars");
 app.get("/", function(req, res) {
     db.Article.find({})
       .then(dbUser => {
-        res.render("index");
+        res.render("index", {data: dbUser});
       })
       .catch(err => {
         res.status(500).json(err);
@@ -44,19 +44,19 @@ app.get("/", function(req, res) {
 
 
 app.get("/scrape", function (req, res) {
-    axios.get("https://www.theonion.com/").then(function (response) {
+    axios.get("https://www.npr.org").then(function (response) {
         var $ = cheerio.load(response.data);
 
         // Grab a selected item from the website to scrape.
-        $(".js_entry-link").each(function (i, element) {
+        $(".title").each(function (i, element) {
             var result = {};
             // Get text from every link and save them as properties of the result object
 
             result.title = $(this).text();
-            result.link = $(this).children("a").attr('href');
-            console.log(result)
+            result.link = $(this).parent("a").attr('href');
+            // console.log(result)
             db.Article.create(result).then(function (dbArticle) {
-                console.log(dbArticle);
+            // console.log(dbArticle);
             }).catch(function (err) {
                 console.log(err)
             })
@@ -66,11 +66,10 @@ app.get("/scrape", function (req, res) {
 });
 
 // Route for getting articles from DB
-app.get("/articles", function (req, res) {
-    var id = req.params.id
+    app.get("/articles", function (req, res) {
     db.Article.find({})
         .then(function (dbArticle) {
-            res.json(dbArticle)
+            res.render("index", {data: dbArticle})
         }).catch(function (err) {
             res.json(err);
         })

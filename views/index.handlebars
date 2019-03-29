@@ -1,6 +1,6 @@
 <nav class="navbar navbar-dark bg-dark nav-justify-content-center">
     <span class="navbar-brand h1">
-        <h3>Onion Scraper || Everything Fake, All the time</h3>
+        <h3>National Public Radio || News Scraper</h3>
     </span>
 </nav>
 
@@ -8,7 +8,13 @@
     <div class="jumbotron-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div id="articles"></div>
+                <div id="articles">
+                    {{log data}}
+                    {{#each data}}
+                    {{this.title}}
+                    {{this.link}}
+                    {{/each}}
+                </div>
                 <div id="notes"></div>
             </div>
         </div>
