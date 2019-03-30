@@ -54,9 +54,9 @@ app.get("/scrape", function (req, res) {
 
             result.title = $(this).text();
             result.link = $(this).parent("a").attr('href');
-            // console.log(result)
+            // console.log(result.link)
             db.Article.create(result).then(function (dbArticle) {
-            // console.log(dbArticle);
+            console.log(dbArticle);
             }).catch(function (err) {
                 console.log(err)
             })
@@ -64,6 +64,11 @@ app.get("/scrape", function (req, res) {
         res.send("Scrape Complete");
     });
 });
+
+
+// create post route for Links to database
+
+
 
 // Route for getting articles from DB
     app.get("/articles", function (req, res) {

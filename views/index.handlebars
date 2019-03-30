@@ -1,7 +1,18 @@
-<nav class="navbar navbar-dark bg-dark nav-justify-content-center">
-    <span class="navbar-brand h1">
-        <h3>National Public Radio || News Scraper</h3>
-    </span>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">NPR News Scraper</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <button class="btn btn-primary mx-3" id= "scrapeBtn" href="#">Scrape new Articles</button>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-success" id="savedArticleBtn" href="#">Saved Articles</button>
+      </li>
+    </ul>
+  </div>
 </nav>
 
 <div class="container">
@@ -9,11 +20,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div id="articles">
-                    {{log data}}
-                    {{#each data}}
-                    {{this.title}}
-                    {{this.link}}
-                    {{/each}}
+                    <table id="results">
+                            {{!-- {{log data}} --}}
+                            {{#each data}}
+                            <li>{{this.title}}</li>
+                            <li>{{this.link}}</li>
+                            {{/each}}
+                    </table>
                 </div>
                 <div id="notes"></div>
             </div>
