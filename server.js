@@ -53,7 +53,7 @@ app.get("/scrape", function (req, res) {
             // Get text from every link and save them as properties of the result object
 
             result.title = $(this).text();
-            result.link = $(this).parent("a").attr('href');
+            result.link = $(this).children("a").attr('href');
             // console.log(result.link)
             db.Article.create(result).then(function (dbArticle) {
             console.log(dbArticle);
