@@ -1,17 +1,19 @@
 var express = require("express");
 var axios = require("axios");
 var cheerio = require("cheerio");
-var db = require("./models");
+var db = require("../models");
 var app = express();
 
 module.exports = function (app) {
     app.get("/articles", function (req, res) {
         db.Article.find({})
             .then(function (dbArticle) {
+                console.log(dbArticle);
                 res.render("index", { data: dbArticle })
             }).catch(function (err) {
                 res.json(err);
             })
+        
     });
 
 
