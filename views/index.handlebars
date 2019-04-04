@@ -9,9 +9,9 @@
       <li class="nav-item active">
         <button class="btn btn-primary mx-3" id="scrapeBtn" href="#">Scrape new Articles</button>
       </li>
-      <li class="nav-item">
+      {{!-- <li class="nav-item">
         <button class="btn btn-success" id="savedArticleBtn" href="#">Saved Articles</button>
-      </li>
+      </li> --}}
     </ul>
   </div>
 </nav>
@@ -25,17 +25,21 @@
             {{!-- {{log data}} --}}
             {{#each data}}
             <li>
-              <p>{{this.title}}</p>
+              <h4>{{this.title}}</h4>
             </li>
-            <li class= "links">
-              {{this.link}}
+            <li class="links">
+              <a>{{this.link}}</a>
+              <div id="notes">
+                <button class="btn btn-info" id="showNotes">Show Notes</button>
+              </div>
             </li>
             <hr>
             {{/each}}
           </ul>>
         </div>
       </div>
-      <div class="col-md-4 offset-2">
+
+      {{!-- <div class="col-md-4 offset-2">
         <div id="notes">
           <form id="commentForm">
             <div class="form-group">
@@ -45,7 +49,8 @@
             <button type="submit" id="commentSubmit" class="btn btn-info">Submit</button>
           </form>
         </div>
-      </div>
+      </div> --}}
+
     </div>
   </div>
 </div>

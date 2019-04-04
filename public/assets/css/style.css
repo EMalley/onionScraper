@@ -13,16 +13,17 @@ body {
     width:100%;
 }
 
-.links{
+a{
     font-size: 18px;
     color:#fff;
-    -webkit-text-stroke: .5px #000 
+    -webkit-text-stroke: .5px #000;
+    cursor: pointer;
 }
 
-p {
+h4 {
     font-size: 24px;
     color:#fff;
-    -webkit-text-stroke: .5px #000 
+    -webkit-text-stroke: .5px #000;
 }
 
 ul {
