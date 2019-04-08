@@ -3,10 +3,8 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 
 // scraping tools
-var PORT = 8080;
+var PORT = process.env.PORT || 8080;
 var app = express();
-
-
 
 // Configure middleware
 
