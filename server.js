@@ -25,6 +25,15 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+// -----------------Database Config with Mongoose---------------
+var databaseUri = 'mongodb://localhost/nprScraper';
+if (process.env.MONGODB_URI) {
+    mongoose.connect(process.env.MONGODB_URI);    
+}
+else{ 
+    mongoose.connect(databaseUri);
+}
+// --------------------------------------------------------------
 
 // Routes 
 // ++++++++++++++++++++++++++++++++++++++++++++++

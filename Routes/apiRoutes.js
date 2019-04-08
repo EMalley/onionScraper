@@ -8,38 +8,39 @@ module.exports = function (app) {
     app.get("/articles", function (req, res) {
         db.Article.find({})
             .then(function (dbArticle) {
-                console.log(dbArticle);
+                // console.log(dbArticle);
                 res.render("index", { data: dbArticle })
             }).catch(function (err) {
                 res.json(err);
             })
-        
+
     });
 
 
     //Route to get an Article by its id and populate it with its note. 
     app.get("/articles/:id", function (req, res) {
-        var id = req.params.id;
-        db.Article.findById(id)
+        db.Article.findOne({ _id: req.params.id })
+            .populate("note")
             .then(function (dbArticle) {
                 res.json(dbArticle)
-            }).catch(function (err) {
+            })
+            .catch(function (err) {
                 res.json(err)
-            });
+            })
     });
-
-
-    //Route to Save a specific note from an article
-    app.get("/articles/:id", function (req, res) {
+    
+    //Route to Save/Update an articles Note
+    app.post("/articles/:id", function (req, res){
         db.Note.create(req.body)
-            .then(function (dbNote) {
-                return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote })
-                    .then(function (dbArticle) {
-                        res.json(dbArticle)
-                    }).catch(function (err) {
-                        res.json(err)
-                    });
-            });
-    });
+        .then(function(dbNote){
+            return db.Article.findOneAndUpdate({_id: req.params.id}, {_id: dbNote._id}, {new: true})
+        })
+        .then(function(dbArticle){
+            res.json(dbArticle);
+        })
+        .catch(function(err){
+            res.json(err)
+        });
+    }); 
+    
 }
-

@@ -33,7 +33,7 @@ module.exports = function (app) {
                 // console.log(result.link)
                 db.Article.update(result, result, { upsert: true })
                     .then(function (dbArticle) {
-                        console.log(dbArticle);
+                        // console.log(dbArticle);
                     }).catch(function (err) {
                         console.log(err)
                     })

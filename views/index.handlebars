@@ -22,16 +22,21 @@
       <div class="col-md-6">
         <div id="articles">
           <ul>
-            {{!-- {{log data}} --}}
             {{#each data}}
             <li>
               <h4>{{this.title}}</h4>
             </li>
             <li class="links">
-              <a href="{{this.link}}">{{this.link}}</a>
+              <a href="{{this.link}}">Click to read more</a>
               <div id="notes">
-                <button class="btn btn-info" id="showNotes">Show Notes</button>
+                {{#if this.note}}
+                    <h4>" + {{this.note.title}}</h4>
+                    <input id='titleInput' name='title' >
+                    <textarea id='bodyInput' name='body'></textarea>
+                    <button data-id='{{this.note._id}}' id='saveNote'>Save Note</button>
+                {{/if}}
               </div>
+                {{!-- <button class="btn btn-info" id="showNotes" data-id="{{this._id}}">Add Notes</button> --}}
             </li>
             <hr>
             {{/each}}
